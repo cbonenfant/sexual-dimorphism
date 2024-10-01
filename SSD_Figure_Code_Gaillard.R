@@ -13,6 +13,9 @@ library(mgcv)
 
 load("ssd_ngy.RData")
 
+logit <- function(x) {log(x / (1 - x))}
+ilogit <- function(x) {exp(x) / (1 + exp(x))}
+
 
 ## ---------------------
 ##
@@ -88,6 +91,8 @@ dev.off()
 ## Code to plot Fig. 2
 ##
 ## ---------------------
+
+ssd9$is.Mdimo <- as.numeric(ssd9$massDimorphism == "Male-Biased Dimorphic")
 
 glm1 <- glm(is.Mdimo ~ massM, data =  ssd9, family = "binomial")
 summary(glm1)
